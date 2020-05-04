@@ -1,7 +1,9 @@
 const BillingCycle = require ('./billingCycle');
+const errorHandle = require ('../common/errorHandler');
 
 BillingCycle.methods(['get','post','put','delete']);
 BillingCycle.updateOptions({new : true, runValidators: true});
+BillingCycle.after('post', errorHandle).after('put',errorHandle);
 
  BillingCycle.route('count', (req, res,next) => {
      BillingCycle.count((error, value) => {
@@ -28,7 +30,7 @@ BillingCycle.updateOptions({new : true, runValidators: true});
         }
     })
 });
-
+ 
 
 
 module.exports = BillingCycle;
