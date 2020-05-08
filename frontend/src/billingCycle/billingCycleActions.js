@@ -23,6 +23,10 @@ export function update(values) {
     return submit(values, 'put');
 }
 
+export function remove(values) {
+    return submit(values, 'delete');
+}
+
 function submit(values, method) {
     return dispatch => {
         const id = values._id ? values._id : '';
@@ -42,6 +46,15 @@ export function showUpdate(billingCycle) {
         //redux multi
         showTabs('tabUpdate'),
         selectTab('tabUpdate'),
+        initialize('billingCycleForm', billingCycle)
+    ];
+};
+
+export function showDelete(billingCycle) {
+    return [
+        //redux multi
+        showTabs('tabDelete'),
+        selectTab('tabDelete'),
         initialize('billingCycleForm', billingCycle)
     ];
 };
