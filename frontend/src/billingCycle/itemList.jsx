@@ -29,8 +29,15 @@ class ItemList extends Component {
                 <td><Field name={`${this.props.field}[${index}].value`} component={Input}
                     placeholder='Informe o valor' readOnly={this.props.readOnly} /></td>
                 <If test={this.props.showStatus}>
-                    <td><Field name={`${this.props.field}[${index}].status`} component={Input}
-                        placeholder='Informe o status' readOnly={this.props.readOnly} /></td>
+                    <td><Field name={`${this.props.field}[${index}].status`}
+                        component="select"
+                        placeholder='Informe o status'
+                        readOnly={this.props.readOnly}>
+                        <option></option>
+                        <option value="PAGO">Pago</option>
+                        <option value="PENDENTE">Pendente</option>
+                        <option value="AGENDADO">Agendado</option>
+                    </Field></td>
                 </If>
                 <td>
                     <button type='button' className='btn btn-success'
