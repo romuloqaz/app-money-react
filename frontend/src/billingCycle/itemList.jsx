@@ -5,17 +5,17 @@ import { Field, arrayInsert, arrayRemove } from 'redux-form';
 import Grid from '../common/layout/grid';
 import Input from '../common/form/input';
 
-class CreditList extends Component {
+class ItemList extends Component {
 
     add(index, item = {}) {
         if (!this.props.readOnly) {
-            this.props.arrayInsert('billingCycleForm', 'credits', index, item);
+            this.props.arrayInsert('billingCycleForm', this.props.field, index, item);
         }
     }
 
     remove(index) {
         if (!this.props.readOnly && this.props.list.length > 1) {
-            this.props.arrayRemove('billingCycleForm', 'credits', index);
+            this.props.arrayRemove('billingCycleForm', this.props.field, index);
         }
     }
 
@@ -23,9 +23,9 @@ class CreditList extends Component {
         const list = this.props.list || []
         return list.map((item, index) => (
             <tr key={index}>
-                <td><Field name={`credits[${index}].name`} component={Input}
+                <td><Field name={`${this.props.field}[${index}].name`} component={Input}
                     placeholder='Informe o nome' readOnly={this.props.readOnly} /></td>
-                <td><Field name={`credits[${index}].value`} component={Input}
+                <td><Field name={`${this.props.field}[${index}].value`} component={Input}
                     placeholder='Informe o valor' readOnly={this.props.readOnly} /></td>
                 <td>
                     <button type='button' className='btn btn-success'
@@ -49,7 +49,7 @@ class CreditList extends Component {
         return (
             <Grid cols={this.props.cols}>
                 <fieldset>
-                    <legend>Créditos</legend>
+                    <legend>{this.props.legend}</legend>
                     <table className='table'>
                         <thead>
                             <tr>
@@ -71,4 +71,4 @@ class CreditList extends Component {
 
 const mapDispatchToProps = dispatch => bindActionCreators({ arrayInsert, arrayRemove }, dispatch);
 
-export default connect(null, mapDispatchToProps)(CreditList);
+export default connect(null, mapDispatchToProps)(ItemList);
